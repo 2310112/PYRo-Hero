@@ -283,12 +283,12 @@ void deps_init()
     // Pitch: 使用 DM 电机 (示例 ID: Master 0x11, Slave 0x21, CAN1)
     // 根据 hybrid 中的用法进行配置
     screw_gimbal_deps->motor_deps.pitch =
-        new dji_m3508_motor_drv_t(dji_motor_tx_frame_t::id_2, can_hub_t::can3);
+        new dji_m3508_motor_drv_t(dji_motor_tx_frame_t::id_2, bsp_can::can3);
 
     // Yaw: 使用 DJI GM6020 (ID 2, CAN1)
 
     screw_gimbal_deps->motor_deps.yaw = new dji_gm_6020_motor_drv_t(
-        dji_motor_tx_frame_t::id_3, can_hub_t::can1);
+        dji_motor_tx_frame_t::id_3, bsp_can::can1);
 
 
     // 3. 初始化串级 PID

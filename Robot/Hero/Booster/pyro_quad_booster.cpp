@@ -191,7 +191,7 @@ void quad_booster_t::_speed_control()
 {
     static uint16_t last_launching_num = 0;
     auto &board_drv =
-        board_drv_t::get_instance(board_drv_t::role_t::GIMBAL, can_hub_t::can1);
+        board_drv_t::get_instance(board_drv_t::role_t::GIMBAL, bsp_can::can1);
     board_drv_t::event_shoot_t shoot_event{};
 
 
@@ -432,10 +432,6 @@ void quad_booster_t::_send_trigger_command() const
     _ctx.motor.trigger_wheel->send_torque(_ctx.data.out_trig_torque);
 }
 
-quad_booster_t::booster_ctx_t& quad_booster_t::get_ctx()
-{
-    return _ctx;
-}
 
 } // namespace pyro
 

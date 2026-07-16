@@ -58,6 +58,7 @@ if (BOARD STREQUAL "GIMBAL_BOARD")
 
             pyro_mission_planer.cpp
             pyro_init_thread.cpp
+            ../pyro_algo_solvepitch.cpp
     )
 
     # 针对 Gimbal 的特殊头文件包含
