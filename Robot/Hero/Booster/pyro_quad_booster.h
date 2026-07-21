@@ -123,7 +123,8 @@ struct booster_ctx_t
     quad_deps_t::motor_deps_t motor;
     quad_deps_t::pid_deps_t pid;
     booster_data_ctx_t data;
-    booster_shoot_data_t shoot_normal_data{11.7f, 11.7f, 10.8f};
+    //booster_shoot_data_t shoot_normal_data{11.7f, 11.7f, 10.8f};
+    booster_shoot_data_t shoot_normal_data{16.3f, 15.6f, 10.0f};
     booster_shoot_data_t shoot_deploy_data{16.3f, 15.6f, 10.0f};
     quad_booster_cmd_t *cmd{};
 };
@@ -147,6 +148,22 @@ class quad_booster_t final
 
 
   public:
+    friend void hero_booster_thread(void* argument);
+    friend void booster_vt032cmd(uint32_t notify_val);
+    friend void hero_booster_init(void* argument);
+
+    booster_shoot_data_t& getShootData() {
+        return _use_deploy_data() ? _ctx.shoot_deploy_data : _ctx.shoot_normal_data;
+    }
+
+    booster_data_ctx_t& getData() {
+        return _ctx.data;
+    }
+
+    bool isDeployMode() const {
+        return _use_deploy_data();
+    }
+
     quad_booster_t(const quad_booster_t &)            = delete;
     quad_booster_t &operator=(const quad_booster_t &) = delete;
 
@@ -171,6 +188,9 @@ class quad_booster_t final
     void _launch_delay_calculate();
     void _reset_active_shoot_data();
     [[nodiscard]] bool _use_deploy_data() const;
+
+    // --- leso+p控制器 ---
+    class fric_leso_controller_t* _leso_controller{nullptr};
 
     // 角度归一化辅助函数
     static float _normalize_angle(float angle);

@@ -222,27 +222,27 @@ void gimbal_vt032cmd()
     // --- 新增：判断拨动到 DOWN (右侧) 时进入自瞄状态 ---
     if (pyro::sw_pos_t::DOWN == vrc.switches.gear.current_pos)
     {
-        screw_gimbal_cmd_ptr->autoaim_mode = true;
-
-        if (pyro::autoaim_drv_t::get_instance().check_online())
-        {
-            // 解析并赋值 PC 下发的目标角度
-            const auto &rx_data =
-                pyro::autoaim_drv_t::get_instance().get_target_data();
-            screw_gimbal_cmd_ptr->target_yaw   = rx_data.shoot_yaw;
-            screw_gimbal_cmd_ptr->target_pitch = -rx_data.shoot_pitch;
-            screw_gimbal_cmd_ptr->pitch_delta_angle =
-                -vrc.axes.ry * 0.0025f - vrc.mouse_axes.y * 0.25f;
-            screw_gimbal_cmd_ptr->yaw_delta_angle =
-                -vrc.axes.rx * 0.0025f - vrc.mouse_axes.x * 0.6f;
-        }
-        else
-        {
-            screw_gimbal_cmd_ptr->pitch_delta_angle =
-                -vrc.axes.ry * 0.0025f - vrc.mouse_axes.y * 0.25f;
-            screw_gimbal_cmd_ptr->yaw_delta_angle =
-                -vrc.axes.rx * 0.0025f - vrc.mouse_axes.x * 0.6f;
-        }
+        // screw_gimbal_cmd_ptr->autoaim_mode = true;
+        //
+        // if (pyro::autoaim_drv_t::get_instance().check_online())
+        // {
+        //     // 解析并赋值 PC 下发的目标角度
+        //     const auto &rx_data =
+        //         pyro::autoaim_drv_t::get_instance().get_target_data();
+        //     screw_gimbal_cmd_ptr->target_yaw   = rx_data.shoot_yaw;
+        //     screw_gimbal_cmd_ptr->target_pitch = -rx_data.shoot_pitch;
+        //     screw_gimbal_cmd_ptr->pitch_delta_angle =
+        //         -vrc.axes.ry * 0.0025f - vrc.mouse_axes.y * 0.25f;
+        //     screw_gimbal_cmd_ptr->yaw_delta_angle =
+        //         -vrc.axes.rx * 0.0025f - vrc.mouse_axes.x * 0.6f;
+        // }
+        // else
+        // {
+        //     screw_gimbal_cmd_ptr->pitch_delta_angle =
+        //         -vrc.axes.ry * 0.0025f - vrc.mouse_axes.y * 0.25f;
+        //     screw_gimbal_cmd_ptr->yaw_delta_angle =
+        //         -vrc.axes.rx * 0.0025f - vrc.mouse_axes.x * 0.6f;
+        // }
     }
     else // MID 档位为纯手动控制
     {

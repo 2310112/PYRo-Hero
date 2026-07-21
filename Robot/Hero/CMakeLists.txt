@@ -47,6 +47,10 @@ if (BOARD STREQUAL "GIMBAL_BOARD")
             Booster/fsm/pyro_quad_stall_state.cpp
             Booster/fsm/pyro_quad_temp_state.cpp
 
+            # === Booster_physics ===
+            Booster/fric_leso+p_controller/pyro_leso_fric_controller.cpp
+
+
             # === Communication ===
             Communication/Gimbal_board/pyro_autoaim_drv.cpp
             Communication/Gimbal_board/pyro_autoaim_com.cpp
